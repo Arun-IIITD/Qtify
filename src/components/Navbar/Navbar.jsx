@@ -26,6 +26,8 @@ function Navbar({ searchData }) {
       <Button
         variant="outlined"
         sx={{
+          fontFamily: "Poppins, sans-serif",
+
           color: "#1db954",
           backgroundColor: "black",
           borderColor: "#1db954",

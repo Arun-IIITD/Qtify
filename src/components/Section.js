@@ -4,20 +4,23 @@ import { Box, Typography, Button } from "@mui/material";
 import AlbumCard from "./AlbumCard";
 import Carousel from "./Carousel";
 
-const Section = ({ title, fetchUrl }) => {
+const Section = ({ title, fetchUrl, testId }) => {
   const [albums, setAlbums] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [expanded, setExpanded] = useState(false); // clearer name
 
   useEffect(() => {
-    axios.get(fetchUrl).then((res) => {
-      setAlbums(res.data);
-    }).catch(err => {
-      console.error("Error fetching albums:", err);
-    });
+    axios
+      .get(fetchUrl)
+      .then((res) => {
+        setAlbums(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching albums:", err);
+      });
   }, [fetchUrl]);
 
   return (
-    <Box sx={{ my: 6, px: 2 }}>
+    <Box sx={{ my: 6, px: 2 }} data-testid={testId}>
       {/* Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
         <Typography variant="h5" fontWeight="bold" sx={{ color: "white" }}>
@@ -26,7 +29,7 @@ const Section = ({ title, fetchUrl }) => {
         <Button
           variant="text"
           size="small"
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() => setExpanded(!expanded)}
           sx={{
             color: "#1db954",
             fontWeight: "bold",
@@ -34,24 +37,12 @@ const Section = ({ title, fetchUrl }) => {
             "&:hover": { textDecoration: "underline" },
           }}
         >
-          {collapsed ? "Show All" : "Collapse"}
+          {expanded ? "Collapse" : "Show All"}
         </Button>
       </Box>
 
       {/* Conditional Rendering */}
-      {collapsed ? (
-        <Carousel
-          data={albums}
-          renderItem={(album) => (
-            <AlbumCard
-              key={album.id}
-              image={album.image}
-              title={album.title}
-              follows={album.follows}
-            />
-          )}
-        />
-      ) : (
+      {expanded ? (
         <Box
           sx={{
             display: "flex",
@@ -69,6 +60,18 @@ const Section = ({ title, fetchUrl }) => {
             />
           ))}
         </Box>
+      ) : (
+        <Carousel
+          data={albums}
+          renderItem={(album) => (
+            <AlbumCard
+              key={album.id}
+              image={album.image}
+              title={album.title}
+              follows={album.follows}
+            />
+          )}
+        />
       )}
     </Box>
   );
