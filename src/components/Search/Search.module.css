@@ -1,0 +1,63 @@
+/* Search.module.css */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 10px;       /* pill shape */
+  overflow: hidden;
+  width: 100%;
+  max-width: 700px;
+  height: 48px;
+  border: 1px solid var(--color-black);
+}
+
+.search {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  border-radius: 20px 0 0 20px;  /* rounded left side */
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* centers the img */
+  background: #34c94b;
+  border: none;
+  padding: 0 16px;
+  cursor: pointer;
+  border-radius: 0 20px 20px 0;  /* rounded right side */
+  transition: background 0.2s ease-in-out;
+}
+
+.searchButton:hover {
+  background: #2ca13f;       /* darker green on hover */
+}
+
+.searchButton img {
+  width: 200px;
+  height: 20px;
+  object-fit: contain;       /* avoid stretching */
+}
+
+/* Search dropdown styles */
+.listElement {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.albumTitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.albumArtists {
+  font-size: 12px;
+  color: gray;
+  margin: 0;
+}
